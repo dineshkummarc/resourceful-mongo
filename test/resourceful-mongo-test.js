@@ -3,11 +3,27 @@ var db = require('./test-helper'),
     should = require('should'),
     resourceful = require('resourceful');
 
+<<<<<<< HEAD
 describe('Connecting', function() {
 
   it("by uri", function() {
     var config = resourceful.use("mongodb", {uri:"mongodb://test.mongodb.com:4444/resourceful-mongo-test", collection: "test"}).connection.config;
     
+=======
+beforeEach(db.drop);
+
+describe('Connecting', function() {
+
+  it("open new connection", function(done) {
+    resourceful.use("mongodb", {uri: "mongodb://127.0.0.1:27017/resourceful-mongo-test", onConnect: function(err) {
+       if (err) throw err;
+       done();
+    }});
+  });
+
+  it("by uri", function() {
+    var config = resourceful.use("mongodb", {uri: "mongodb://test.mongodb.com:4444/resourceful-mongo-test", collection: "test"}).connection.config;
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
     config.host.should.equal("test.mongodb.com");
     config.port.should.equal(4444);
     config.database.should.equal("resourceful-mongo-test");
@@ -52,9 +68,14 @@ describe('Connecting', function() {
 });
 
 describe("Creating", function() {
+<<<<<<< HEAD
   before(db.start);
 
   it("creates a simple model", function(done){
+=======
+
+  it("creates a simple model", function(done) {
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
     
     db.Person.create({ name: 'Bob', age: 99 }, function (err, person) {
       if (err) { done(err); }
@@ -65,6 +86,7 @@ describe("Creating", function() {
       done();
     });
   });
+<<<<<<< HEAD
 
 });
 
@@ -74,6 +96,26 @@ describe("Updating", function() {
   it("paritally updates model", function(done) {
     db.Person.create({ name: 'Bob', age: 99 }, function (err, person) {
       if (err) { done(err); }
+=======
+});
+
+describe("Saving", function() {
+
+  it("saves without error", function(done) {
+    
+    db.Person.create({ name: 'Bob', age: 99 }, function (err, person) {
+      if (err) done(err);
+      done();
+    });
+  });
+});
+
+describe("Updating", function() {
+
+  it("paritally updates model", function(done) {
+    db.Person.create({ name: 'Bob', age: 99 }, function (err, person) {
+      if (err) done(err);
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
       
       person.update({name:"Steve"}, function(err, person){
         if(err) return done(err);
@@ -83,6 +125,7 @@ describe("Updating", function() {
         done();
       });
     });
+<<<<<<< HEAD
 
   });
 
@@ -90,6 +133,12 @@ describe("Updating", function() {
 
 describe("Finding", function(){
   beforeEach(db.start);
+=======
+  });
+});
+
+describe("Finding", function(){
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
 
   it("all resources", function(done) {
     var p = db.people;
@@ -102,7 +151,10 @@ describe("Finding", function(){
         done();
       });
     });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
   });
 
   it("by id", function(done) {
@@ -117,7 +169,10 @@ describe("Finding", function(){
 
         done();
       });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
     });
   });
 
@@ -132,27 +187,55 @@ describe("Finding", function(){
         done();
       });
     });
+<<<<<<< HEAD
 
   });
 
+=======
+  });
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
 });
 
 describe("Destroying", function() {
   beforeEach(function(done) {
+<<<<<<< HEAD
     db.start(function() {
       db.createPeople([{"_id": "34", name :"bob"}, db.people.steve], function(err) {
+=======
+    db.createPeople([{name: "bob", age: 22}, db.people.steve], function(err) {
+      done();
+    });
+  });
+
+  it("by id", function(done) {
+
+    db.Person.create(db.people.bob, function(err, bob) {
+      db.Person.destroy(bob.id, function(err, result) {
+
+        if(err) done(err);
+  
+        result.should.equal(1);
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
         done();
       });
     });
   });
   
+<<<<<<< HEAD
   it("by id", function(done) {
     db.Person.destroy("34", function(err, result) {
+=======
+  it("by name", function(done) {
+    db.Person.destroy({name: "bob"}, function(err, result) {
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
       if(err) done(err);
 
       result.should.equal(1);
       done();
     });
   });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
 });

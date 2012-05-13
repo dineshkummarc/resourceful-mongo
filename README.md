@@ -16,6 +16,7 @@ This project is in a very early stage, with limited functionality. Don't use in 
 ``` js
   var resourceful = require('resourceful-mongo');
   
+<<<<<<< HEAD
   var Person = resourceful.define('person', function () {
     //
     // Specify use of the mongodb engine
@@ -24,11 +25,46 @@ This project is in a very early stage, with limited functionality. Don't use in 
       database: 'flatiron_test', //required - databasename which contains collections
       collection: "people", // required - the collection to use for this resource
       safe : true // optional - run the driver in safe mode to ensure that the update succeeded. Defaults to false
+=======
+  //Define the resources
+  var Person = resourceful.define('person', function () {
+
+    this.use('mongodb', {
+      uri: "mongodb://localhost/databaseName", // required - the mongo URI of the database
+      collection: "people", // required - the name of the collection
+      safe: true // optional - run the driver in safe mode to ensure that the update succeeded. Defaults to false
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
     });
     
     this.string('name');
     this.number('age');
   });
+<<<<<<< HEAD
+=======
+
+  var Flower = resourceful.define('flower', function () {
+
+    this.use('mongodb', {
+
+      //The mongo URI can also be defined piecemeal
+      host: "localhost", 
+      database: "databaseName",
+      collection: "flowers",
+      safe: true 
+    });
+    
+    this.string('color');
+    this.number('petals');
+  });
+
+  //Open the mongodb connection
+  resourceful.use('mongodb', {
+    uri: "mongodb://localhost/databaseName", // required - the connection to be opened
+    onConnect: function (err) { // required - the callback upon opening the database connection
+        if (!err) app.start(8000);
+    }
+  });
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
 ```
 
 ## Installation

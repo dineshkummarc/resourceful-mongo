@@ -1,6 +1,9 @@
 language: node_js
 node_js:
+<<<<<<< HEAD
   - 0.4
+=======
+>>>>>>> 50ca669151fcfded7fd1ec4bec42a4b56a4517fa
   - 0.6
 
 notifications:
